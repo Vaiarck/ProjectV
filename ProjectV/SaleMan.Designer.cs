@@ -28,21 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
             label1 = new Label();
             label2 = new Label();
-            listBox1 = new ListBox();
+            comboBox1 = new ComboBox();
             SuspendLayout();
-            // 
-            // button1
-            // 
-            button1.Location = new Point(431, 52);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // label1
             // 
@@ -64,24 +53,23 @@
             label2.Text = "label2";
             label2.Click += label2_Click;
             // 
-            // listBox1
+            // comboBox1
             // 
-            listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(267, 52);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(120, 94);
-            listBox1.TabIndex = 3;
-            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(218, 53);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(169, 23);
+            comboBox1.TabIndex = 3;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // SaleMan
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(listBox1);
+            Controls.Add(comboBox1);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(button1);
             Name = "SaleMan";
             Text = "SaleMan";
             Load += SaleMan_Load;
@@ -90,10 +78,8 @@
         }
 
         #endregion
-
-        private Button button1;
         private Label label1;
         private Label label2;
-        private ListBox listBox1;
+        private ComboBox comboBox1;
     }
 }

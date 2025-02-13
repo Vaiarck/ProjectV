@@ -41,6 +41,7 @@ namespace ProjectV
         public string ExtraInfo { get; set; }
         public string Comments { get; set; }
         public string Description { get; set; }
+        public string Status { get; set; }
 
     }
 

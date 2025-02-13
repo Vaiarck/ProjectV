@@ -38,7 +38,7 @@ namespace ProjectV
             label5.ForeColor = Color.Coral;
             using (Con db = new())
             {
-
+                label5.Text = db.Apps.First().Status;
                 //Раскоментировать когда буду добавлять новые строки и ТАблицы
                 //db.Database.EnsureDeleted();
 
@@ -156,7 +156,7 @@ namespace ProjectV
 
                 //    label6.Text += text2;
                 //    label7.Text += text1;
-                
+
 
                 App app = new App();
                 // Извлекаем данные из меток
@@ -170,16 +170,17 @@ namespace ProjectV
                 app.AnotherField = textBox2.Text; // Данные из TextBox2 (предположим, что у вас есть поле AnotherField в классе App)
                 app.ExtraInfo = textBox3.Text; // Данные из TextBox3 (предположим, что у вас есть поле ExtraInfo в классе App)
                 app.Comments = textBox4.Text; // Данные из TextBox4 (предположим, что у вас есть поле Comments в классе App)
+                app.Status = label5.Text;
 
                 // Добавление объекта в базу данных
                 db.Apps.Add(app);
                 db.SaveChanges();
 
                 // Отображение сообщения об успешном добавлении
-                
+
 
                 // Обновление меток с новыми данными (если необходимо)
-                label6.Text += $"{app.Product+ '\n' + app.Condition + '\n' + app.Description+ '\n' + app.OtherField}" + '\n' ;
+                label6.Text += $"{app.Product + '\n' + app.Condition + '\n' + app.Description + '\n' + app.OtherField}" + '\n';
                 label7.Text += $"{app.Qq + '\n' + app.AnotherField + '\n' + app.ExtraInfo + '\n' + app.Comments}" + "\n";
 
 
@@ -196,5 +197,7 @@ namespace ProjectV
         {
 
         }
+
+        
     }
 }

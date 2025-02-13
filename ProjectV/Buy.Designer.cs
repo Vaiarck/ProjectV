@@ -43,6 +43,7 @@
             button5 = new Button();
             panel3 = new Panel();
             panel1 = new Panel();
+            button7 = new Button();
             label7 = new Label();
             label6 = new Label();
             panel2 = new Panel();
@@ -197,6 +198,7 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(52, 53, 57);
+            panel1.Controls.Add(button7);
             panel1.Controls.Add(label7);
             panel1.Controls.Add(label6);
             panel1.Controls.Add(panel2);
@@ -204,6 +206,13 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(800, 200);
             panel1.TabIndex = 18;
+            // 
+            // button7
+            // 
+            button7.Location = new Point(0, 0);
+            button7.Name = "button7";
+            button7.Size = new Size(75, 23);
+            button7.TabIndex = 0;
             // 
             // label7
             // 
@@ -295,5 +304,6 @@
         private Label label5;
         private Label label7;
         private Label label6;
+        private Button button7;
     }
 }
