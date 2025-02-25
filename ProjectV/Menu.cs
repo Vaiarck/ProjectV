@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,11 +17,14 @@ namespace ProjectV
     {
         private Form1 form1;
 
-        public Menu()
+        public Menu(Form1 form1, int id)
         {
+            UserId = id;
+            this.form1 = form1;
             InitializeComponent();
 
         }
+        int UserId { get; set; }
         private void Menu_Load(object sender, EventArgs e)
         {
             Font SmallFont = new Font("Arial", 8);
@@ -35,20 +39,14 @@ namespace ProjectV
             label3.ForeColor = Color.White;
         }
 
-        public Menu(Form1 form1)
-        {
-            InitializeComponent();
-            this.form1 = form1;
-
-
-        }
+       
         private void button1_Click(object sender, EventArgs e)
         {
             if (form1.textBox3.Text == "Покупатель" || form1.textBox3.Text == "Admin")
             {
                 MessageBox.Show("Вы покупатель");
                 this.Hide();
-                Bucket kr = new Bucket();
+                Bucket kr = new Bucket(UserId);
                 kr.Show();
 
             }
@@ -64,7 +62,7 @@ namespace ProjectV
             {
                 MessageBox.Show("Вы кладовщик");
                 this.Hide();
-                Storage sk = new Storage();
+                Storage sk = new Storage(UserId);
                 sk.Show();
             }
             else
@@ -80,7 +78,7 @@ namespace ProjectV
             {
                 MessageBox.Show("Вы кладовщик");
                 this.Hide();
-                Storage sk = new Storage();
+                Storage sk = new Storage(UserId);
                 sk.Show();
             }
             else
@@ -95,7 +93,7 @@ namespace ProjectV
             {
                 MessageBox.Show("Вы продавец");
                 this.Hide();
-                SaleMan pr = new SaleMan();
+                SaleMan pr = new SaleMan(UserId);
                 pr.Show();
             }
             else
@@ -110,7 +108,7 @@ namespace ProjectV
             {
                 MessageBox.Show("Вы продавец");
                 this.Hide();
-                SaleMan pr = new SaleMan();
+                SaleMan pr = new SaleMan(UserId);
                 pr.Show();
             }
             else
@@ -125,7 +123,7 @@ namespace ProjectV
             {
                 MessageBox.Show("Вы покупатель");
                 this.Hide();
-                Bucket kr = new Bucket();
+                Bucket kr = new Bucket(UserId);
                 kr.Show();
 
             }

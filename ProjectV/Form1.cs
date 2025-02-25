@@ -3,6 +3,7 @@ using Microsoft.VisualBasic.ApplicationServices;
 using System.DirectoryServices;
 using System.Security.Cryptography;
 using System.Text;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace ProjectV
 {
@@ -13,9 +14,20 @@ namespace ProjectV
             public string Login { get; set; }
             public string Password { get; set; }
             public string Role { get; set; }
+           
 
-        }
-        public class Sclad 
+    }
+        public class BuyU
+    {
+        public int Id { get; set; }
+        public string All { get; set; }
+        public string KolVo { get; set; }
+        public int? UserId { get; set; }
+        public User User { get; set; }
+        public string Stat { get; set; }
+
+    }
+    public class Sclad 
         {
             public int Id { get; set; }
             public string NameP { get; set; }
@@ -24,37 +36,24 @@ namespace ProjectV
             public string Quantity { get; set; }
 
         }
-        public class BuyU
-    {
-        public int Id { get; set; }
-        public string All { get; set; }
-        public string KolVo { get; set; }
-    }
     public class App
     {
         public int Id { get; set; }
-        public string Product { get; set; }
-        public string Qq { get; set; }
-        public string Condition { get; set; }
-        public string OtherField { get; set; }
-        public string AnotherField { get; set; }
-        public string ExtraInfo { get; set; }
-        public string Comments { get; set; }
-        public string Description { get; set; }
-        public string Status { get; set; }
-
+        public string ADD { get; set; }
+        
     }
 
 
     public class Con: DbContext
     {
             public DbSet<User> Users { get; set; }
-            public DbSet<Sclad> Sclads { get; set; }
             public DbSet<BuyU> BuyUs { get; set; }
+            public DbSet<Sclad> Sclads { get; set; }
             public DbSet<App> Apps { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
                 optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=relationsdb;Trusted_Connection=True;");
+
             }
 
     }
@@ -63,8 +62,8 @@ namespace ProjectV
         public Form1()
         {
             InitializeComponent();
-
         }
+        int UserId {  get; set; }
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -91,10 +90,10 @@ namespace ProjectV
                 {
                     string output;
 
-                    //if (use) { MessageBox.Show("“акой пльзователь уже есть"); }
-                    //else
+                    if (db.Users.Any(u => u.Login == name)) { MessageBox.Show("“акой пльзователь уже есть"); }
+                    else
                     {
-                        User user = new() { Login = name, Password = password, Role = role };
+                        User user = new() { Login = name, Password = password, Role = role};
                         db.Users.Add(user);
                         db.SaveChanges();
                         string text1 = string.Empty;
@@ -113,7 +112,7 @@ namespace ProjectV
                         text1 += user.Password + "\n";
                         text3 += user.Role + "\n";
 
-                        label1.Text += text2;
+                        label1.Text += text2; //text2
                         label2.Text += text1;
                         label3.Text += text3;
                     }
@@ -138,9 +137,11 @@ namespace ProjectV
                 {
                     if (db.Users.Where(user => user.Login == name && user.Password == password).Any())
                     {
+                        UserId = db.Users.Where(user => user.Login == name && user.Password == password).First().Id;
+
                         MessageBox.Show("вы авторизированы");
                         this.Hide();
-                        Menu menu = new(this);
+                        Menu menu = new(this, UserId);
                         menu.Show();
 
 

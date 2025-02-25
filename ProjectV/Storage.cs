@@ -1,4 +1,5 @@
 ﻿using Microsoft.Identity.Client;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,21 +14,15 @@ namespace ProjectV
 {
     public partial class Storage : Form
     {
-        public Storage()
+        public Storage(int id)
         {
+            UserId = id;
             InitializeComponent();
         }
-
+        int UserId { get; set; }
         private void Storage_Load(object sender, EventArgs e)
         {
-            label1.Text = "";
-            label2.Text = "";
-            label3.Text = "";
-            label4.Text = "";
-            label1.ForeColor = Color.Coral;
-            label2.ForeColor = Color.Coral;
-            label3.ForeColor = Color.Coral;
-            label4.ForeColor = Color.Coral;
+           
             label5.ForeColor = Color.White;
             label6.ForeColor = Color.White;
             label7.ForeColor = Color.White;
@@ -39,40 +34,44 @@ namespace ProjectV
                 //db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
                 db.SaveChanges();
-                List<Sclad> Sclads = db.Sclads.ToList();
-                //string skl1 = string.Join(Environment.NewLine, Sclads.Select(u => $"{u.NameP},Жиры:{u.Fats},Углеводы:{u.Carbohydrates}"));
-                //string skl2 = string.Join(Environment.NewLine, Sclads.Select(g => $"{g.Quantity}"));
+                List<Sclad> sclads = db.Sclads.ToList();
 
-                for (int i = 0; i < Math.Min(4, Sclads.Count); i++)
+                // Очищаем ListBox перед добавлением новых элементов
+                listBox1.Items.Clear();
+
+                // Добавляем все названия продуктов в ListBox
+                foreach (var sclad in sclads)
                 {
-                    var sclad = Sclads[i];
-                    // Проверяем, есть ли свободное место для заполнения
-                    //if (index < 3) // Предполагаем, что у нас есть 3 пары Label и TextBox
-                    //{
-                    // Используем индекс для доступа к элементам управления
-                    Label currentLabel = this.Controls.Find($"label{i + 1}", true).FirstOrDefault() as Label;
-
-
-                    if (currentLabel != null)
-                    {
-
-
-                        string LabelText = $"{sclad.NameP}";
-                        //,Жиры: { sclad.Fats},Углеводы: { sclad.Carbohydrates}, Количетсво { sclad.Quantity}
-                        currentLabel.Text = LabelText;
-
-                        // Заполнение элементов управления новыми данными
-                        //currentLabel.Text = skl1;
-                        //currentTextBox.Text = skl2;
-                        // Увеличиваем индекс для следующей записи
-
-                    }
-
-                    //}
-
+                    listBox1.Items.Add(sclad.NameP);
                 }
+
+
+                //List<Sclad> Sclads = db.Sclads.ToList();
+
+
+                //for (int i = 0; i < Math.Min(4, Sclads.Count); i++)
+                //{
+                //    var sclad = Sclads[i];
+                //    Label currentLabel = this.Controls.Find($"label{i + 1}", true).FirstOrDefault() as Label;
+
+
+                //    if (currentLabel != null)
+                //    {
+
+
+                //        string LabelText = $"{sclad.NameP}";
+                //        currentLabel.Text = LabelText;
+
+
+
+                //    }
+
+
+
             }
         }
+
+
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -130,44 +129,33 @@ namespace ProjectV
                         text3 = $"{sclad.Quantity}";
                         text4 = $"{sclad.Carbohydrates}";
 
-                        label1.Text += text1;
-                        label2.Text += text2;
-                        label3.Text += text3;
-                        label4.Text += text4;
+                        
 
                         List<Sclad> Sclads = db.Sclads.ToList();
-                        //string skl1 = string.Join(Environment.NewLine, Sclads.Select(u => $"{u.NameP},Жиры:{u.Fats},Углеводы:{u.Carbohydrates}"));
-                        //string skl2 = string.Join(Environment.NewLine, Sclads.Select(g => $"{g.Quantity}"));
+                        //listBox1.Items.Clear(); 
+                        listBox1.Items.Add(sclad.NameP);
+                        db.SaveChanges();
 
-                        for (int i = 0; i < Math.Min(4, Sclads.Count); i++)
-                        {
-                            sclad = Sclads[i];
-                            // Проверяем, есть ли свободное место для заполнения
-                            //if (index < 3) // Предполагаем, что у нас есть 3 пары Label и TextBox
-                            //{
-                            // Используем индекс для доступа к элементам управления
-                            Label currentLabel = this.Controls.Find($"label{i + 1}", true).FirstOrDefault() as Label;
+                        //for (int i = 0; i < Math.Min(4, Sclads.Count); i++)
+                        //{
+                        //    sclad = Sclads[i];
+
+                        //    Label currentLabel = this.Controls.Find($"label{i + 1}", true).FirstOrDefault() as Label;
 
 
-                            if (currentLabel != null)
-                            {
+                        //    if (currentLabel != null)
+                        //    {
 
 
-                                string LabelText = $"{sclad.NameP}";
-                                currentLabel.Text = LabelText;
-                                //,Жиры:{sclad.Fats},Углеводы:{sclad.Carbohydrates}, Количетсво {sclad.Quantity}
+                        //        string LabelText = $"{sclad.NameP}";
+                        //        currentLabel.Text = LabelText;
 
 
-                                // Заполнение элементов управления новыми данными
-                                //currentLabel.Text = skl1;
-                                //currentTextBox.Text = skl2;
-                                // Увеличиваем индекс для следующей записи
+                        //    }
 
-                            }
 
-                            //}
 
-                        }
+                        //}
 
 
 
@@ -182,7 +170,7 @@ namespace ProjectV
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Bucket bucket = new Bucket();
+            Bucket bucket = new Bucket(UserId);
             bucket.Show();
         }
 
@@ -210,45 +198,37 @@ namespace ProjectV
         {
             using (Con db = new())
             {
-                db.Sclads.RemoveRange(db.Sclads.Where(product => product.NameP == label1.Text));
+                db.Sclads.RemoveRange(db.Sclads.Where(product => product.NameP == listBox1.Text));
                 db.SaveChanges();
-                label1.Text = "";
+                
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            using (Con db = new())
-            {
-                db.Sclads.RemoveRange(db.Sclads.Where(product => product.NameP == label2.Text));
-                db.SaveChanges();
-                label2.Text = "";
-            }
-        }
+      
+        
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            using (Con db = new())
-            {
-                db.Sclads.RemoveRange(db.Sclads.Where(product => product.NameP == label3.Text));
-                db.SaveChanges();
-                label3.Text = "";
-            }
-        }
+        
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-            using (Con db = new())
-            {
-                db.Sclads.RemoveRange(db.Sclads.Where(product => product.NameP == label4.Text));
-                db.SaveChanges();
-                label4.Text = "";
-            }
-        }
+        
 
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            //using (Con db = new())
+            //{
+            //    if (listBox1.Text != string.Empty)
+            //    {
+            //        List<Sclad> Sclads;
+            //        Sclads = db.Sclads.Where(q => q.NameP == textBox1.Text).ToList();
+            //        Sclad sclad1 = Sclads.Where(a => a.NameP == listBox1.Text).First();
+            //        label9.Text = sclad1.NameP;
+            //    }
+            //}
         }
     }
 }

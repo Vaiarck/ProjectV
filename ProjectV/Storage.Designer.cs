@@ -39,16 +39,11 @@
             label7 = new Label();
             label6 = new Label();
             label5 = new Label();
-            button6 = new Button();
-            label3 = new Label();
-            label2 = new Label();
-            label4 = new Label();
-            button5 = new Button();
-            button4 = new Button();
             button3 = new Button();
-            label1 = new Label();
             button2 = new Button();
             panel2 = new Panel();
+            listBox1 = new ListBox();
+            label1 = new Label();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
@@ -162,89 +157,21 @@
             label5.TabIndex = 0;
             label5.Text = "Наименование продукции";
             // 
-            // button6
-            // 
-            button6.Location = new Point(109, 210);
-            button6.Name = "button6";
-            button6.Size = new Size(75, 23);
-            button6.TabIndex = 9;
-            button6.Text = "button6";
-            button6.UseVisualStyleBackColor = true;
-            button6.Click += button6_Click;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(29, 164);
-            label3.Name = "label3";
-            label3.Size = new Size(38, 15);
-            label3.TabIndex = 4;
-            label3.Text = "label3";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(29, 103);
-            label2.Name = "label2";
-            label2.Size = new Size(38, 15);
-            label2.TabIndex = 3;
-            label2.Text = "label2";
-            label2.Click += label2_Click;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(29, 214);
-            label4.Name = "label4";
-            label4.Size = new Size(38, 15);
-            label4.TabIndex = 5;
-            label4.Text = "label4";
-            // 
-            // button5
-            // 
-            button5.Location = new Point(109, 160);
-            button5.Name = "button5";
-            button5.Size = new Size(75, 23);
-            button5.TabIndex = 10;
-            button5.Text = "button5";
-            button5.UseVisualStyleBackColor = true;
-            button5.Click += button5_Click;
-            // 
-            // button4
-            // 
-            button4.Location = new Point(109, 99);
-            button4.Name = "button4";
-            button4.Size = new Size(75, 23);
-            button4.TabIndex = 8;
-            button4.Text = "button4";
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
-            // 
             // button3
             // 
-            button3.Location = new Point(109, 41);
+            button3.Location = new Point(418, 53);
             button3.Name = "button3";
-            button3.Size = new Size(75, 23);
+            button3.Size = new Size(99, 33);
             button3.TabIndex = 7;
-            button3.Text = "button3";
+            button3.Text = "Удалить товар";
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(29, 45);
-            label1.Name = "label1";
-            label1.Size = new Size(38, 15);
-            label1.TabIndex = 2;
-            label1.Text = "label1";
-            label1.Click += label1_Click;
-            // 
             // button2
             // 
-            button2.Location = new Point(634, 214);
+            button2.Location = new Point(686, 214);
             button2.Name = "button2";
-            button2.Size = new Size(75, 23);
+            button2.Size = new Size(23, 23);
             button2.TabIndex = 6;
             button2.Text = "button2";
             button2.UseVisualStyleBackColor = true;
@@ -253,19 +180,31 @@
             // panel2
             // 
             panel2.BackColor = Color.FromArgb(52, 53, 57);
-            panel2.Controls.Add(button2);
             panel2.Controls.Add(label1);
+            panel2.Controls.Add(listBox1);
+            panel2.Controls.Add(button2);
             panel2.Controls.Add(button3);
-            panel2.Controls.Add(button4);
-            panel2.Controls.Add(button5);
-            panel2.Controls.Add(label4);
-            panel2.Controls.Add(label2);
-            panel2.Controls.Add(label3);
-            panel2.Controls.Add(button6);
             panel2.Location = new Point(1, 144);
             panel2.Name = "panel2";
             panel2.Size = new Size(753, 283);
             panel2.TabIndex = 2;
+            // 
+            // listBox1
+            // 
+            listBox1.FormattingEnabled = true;
+            listBox1.Location = new Point(59, 53);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(238, 184);
+            listBox1.TabIndex = 11;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(59, 20);
+            label1.Name = "label1";
+            label1.Size = new Size(171, 15);
+            label1.TabIndex = 12;
+            label1.Text = "Списосок товаров в магазине";
             // 
             // Storage
             // 
@@ -297,18 +236,13 @@
         private TextBox textBox2;
         private Panel panel3;
         private Label label5;
-        private Button button6;
-        private Label label3;
-        private Label label2;
-        private Label label4;
-        private Button button5;
-        private Button button4;
         private Button button3;
-        private Label label1;
         private Button button2;
         private Panel panel2;
         private Label label8;
         private Label label7;
         private Label label6;
+        private ListBox listBox1;
+        private Label label1;
     }
 }

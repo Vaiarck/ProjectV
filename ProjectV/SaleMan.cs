@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,40 +15,27 @@ namespace ProjectV
 {
     public partial class SaleMan : Form
     {
-        public SaleMan()
+        public SaleMan(int id)
         {
+            UserId = id;
             InitializeComponent();
         }
-
+        int UserId { get; set; }
+        List<BuyU> buyUs;
         private void SaleMan_Load(object sender, EventArgs e)
         {
 
-
-            label1.Text = "";
-            label2.Text = "";
             using (Con db = new())
             {
-                //List<App> Apps = db.Apps.ToList();
-                //App app = new App();
-                //label1.Text = $"{app.Product + '\n' + app.Condition + '\n' + app.Description + '\n' + app.OtherField}" + '\n'; ;
-                //label2.Text = $"{app.Qq + '\n' + app.AnotherField + '\n' + app.ExtraInfo + '\n' + app.Comments}" + "\n";
-
-                // Извлечение всех записей из таблицы Apps
-                var apps = db.Apps.ToList(); // Получаем список всех объектов App
-
-                // Пример: вывод данных в DataGridView
-
-                // Если хотите вывести данные в метках:
-                foreach (var app in apps)
+                buyUs = db.BuyUs.Where(y => y.UserId == UserId).ToList();
+                listBox1.Items.Clear();
+                foreach (var s in buyUs)
                 {
-                    // Например, выводим данные в метки на форме
-                    label1.Text += $"{app.Product + '\n' + app.Condition + '\n' + app.Description + '\n' + app.OtherField}" + '\n';
-                    label2.Text += $"{app.Qq + '\n' + app.AnotherField + '\n' + app.ExtraInfo + '\n' + app.Comments + '\n' + app.Status}" + "\n";
-
+                    listBox1.Items.Add(s.All);
                 }
-                App aap = new App();
+
                 comboBox1.Items.AddRange(new string[] { "Заказ на рассмотрении", "Заказ собирается", "Заказ собран" });
-                comboBox1.SelectedItem = aap.Status;
+
 
             }
         }
@@ -82,9 +70,31 @@ namespace ProjectV
         {
             using (Con db = new())
             {
-                db.Apps.First().Status = comboBox1.Text;
-                db.SaveChanges();
+                if (listBox1.Text != string.Empty)
+                {
+                    BuyU buyU = db.BuyUs.Where(buyU => buyU.All == listBox1.Text).First();
+                    List<BuyU> BuyUList = db.BuyUs.Where(d => d.UserId == UserId).ToList();
+                    foreach (var item in BuyUList)
+                    {
+                        item.Stat = comboBox1.Text;
+                    }
+                    db.SaveChanges();
+
+                }
             }
+        }
+
+        private void label2_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            Form1 form1 = new Form1();
+            this.Hide();
+            Menu menu = new (form1, UserId);
+            menu.Show(this);
         }
     }
 }
